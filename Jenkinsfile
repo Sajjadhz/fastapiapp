@@ -9,18 +9,23 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo DOCKERHUB_CREDENTIALS'
+        sh 'docker build -t sajjadhz/fastapiapp:latest .'
       }
     }
     stage('Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
     stage('Push') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_USR'
+        sh 'docker push sajjadhz/fastapiapp:latest'
       }
+    }
+  }
+  post {
+    always {
+      sh 'docker logout'
     }
   }
 }
