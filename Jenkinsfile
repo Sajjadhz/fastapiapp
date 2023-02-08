@@ -10,17 +10,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo env.$GIT_COMMIT.take(7)'
+        sh 'echo ${GIT_COMMIT,length=6}'
       }
     }
     stage('Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh 'echo ${GIT_COMMIT[0..7]}'
       }
     }
     stage('Push') {
       steps {
-        sh 'echo $BUILD_NUMBER-env.$GIT_COMMIT.take(7)'
+        sh 'echo $BUILD_NUMBER-GIT_COMMIT.take(7)'
       }
     }
   }
