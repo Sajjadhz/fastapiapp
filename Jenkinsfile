@@ -10,23 +10,14 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo ${GIT_COMMIT,length=6}'
+        sh '''
+        echo start
+        echo ${GIT_COMMIT,length=6}
+        echo ${GIT_COMMIT[0..7]}
+        echo $GIT_COMMIT.take(7)
+        echo end
+        '''
       }
     }
-    stage('Login') {
-      steps {
-        sh 'echo ${GIT_COMMIT[0..7]}'
-      }
-    }
-    stage('Push') {
-      steps {
-        sh 'echo $BUILD_NUMBER-GIT_COMMIT.take(7)'
-      }
-    }
-  }
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
+  }  
 }
