@@ -12,6 +12,7 @@ pipeline {
       steps {
         sh '''
         echo start
+        ${GIT_COMMIT:0:8}
         echo $GIT_COMMIT[0..7]
         echo $GIT_COMMIT.take(7)
         echo end
