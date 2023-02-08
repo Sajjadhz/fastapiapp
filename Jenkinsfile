@@ -6,19 +6,28 @@ pipeline {
   environment {
     DOCKERHUB_CREDENTIALS = credentials('sajjad-dockerhub')
     DOCKER_REGISTRY = 'docker.io'
-    GIT_CMT_SHORT_1 = "${GIT_COMMIT.take(7)}"
-    GIT_CMT_SHORT_2 = "${GIT_COMMIT[0..7]}"
+    GIT_CMT_SHORT = "${GIT_COMMIT.take(7)}"
   }
   stages {
     stage('Build') {
       steps {
-        sh '''
-        echo start        
-        echo $GIT_CMT_SHORT_1
-        echo $GIT_CMT_SHORT_2
-        echo end
-        '''
+        sh 'docker build -t $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-$GIT_CMT_SHORT .'
       }
     }
-  }  
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Push') {
+      steps {
+        sh 'docker push $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-$GIT_CMT_SHORT'
+      }
+    }
+  }
+  post {
+    always {
+      sh 'docker logout'
+    }
+  }
 }
