@@ -6,14 +6,18 @@ pipeline {
   environment {
     DOCKERHUB_CREDENTIALS = credentials('sajjad-dockerhub')
     DOCKER_REGISTRY = 'docker.io'
+    GIT_CMT_SHORT_1 = GIT_COMMIT[0..7]
+    GIT_CMT_SHORT_2 = GIT_COMMIT.take(7)
+    GIT_CMT_SHORT_3 = GIT_COMMIT:0:8
   }
   stages {
     stage('Build') {
       steps {
         sh '''
         echo start        
-        echo ${GIT_COMMIT[0..7]}
-        echo $GIT_COMMIT.take(7)
+        echo $GIT_CMT_SHORT_1
+        echo $GIT_CMT_SHORT_2
+        echo $GIT_CMT_SHORT_3
         echo end
         '''
       }
