@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-${GIT_COMMIT:0:8} .'
+        sh 'echo ${GIT_COMMIT:0:8}'
       }
     }
     stage('Login') {
@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-${GIT_COMMIT:0:8}'
+        sh 'echo $BUILD_NUMBER-${GIT_COMMIT:0:8}'
       }
     }
   }
