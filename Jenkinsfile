@@ -5,11 +5,12 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('sajjad-dockerhub')
+    DOCKER_REGISTRY = 'sajjadhz'
   }
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t sajjadhz/fastapiapp:latest .'
+        sh 'docker build -t $DOCKER_REGISTRY/fastapiapp:latest .'
       }
     }
     stage('Login') {
@@ -19,7 +20,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push sajjadhz/fastapiapp:latest'
+        sh 'docker push $DOCKER_REGISTRY/fastapiapp:latest'
       }
     }
   }
