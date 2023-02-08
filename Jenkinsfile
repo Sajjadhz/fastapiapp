@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo env.GIT_COMMIT.take(7)'
+        sh 'echo env.$GIT_COMMIT.take(7)'
       }
     }
     stage('Login') {
@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'echo $BUILD_NUMBER-env.GIT_COMMIT.take(7)'
+        sh 'echo $BUILD_NUMBER-env.$GIT_COMMIT.take(7)'
       }
     }
   }
