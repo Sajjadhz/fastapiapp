@@ -328,8 +328,9 @@ pod/fastapiapp-test-connection              0/1     Completed   0          5h4m
 - Rancher installation and configurations
 - Jenkins installation and configurations
 - Adding stateful app to the cluster
-- Backup System
+- Backup System (Velero)
 - Disaster Recovery
 - Adding Ingress
-- Adding monitoring
+- Adding monitoring (EFK Stack)
 - Adding multiple microservices to the cluster and API GW
+- Adding configuratin management tool (Ansible)
