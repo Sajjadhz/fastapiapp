@@ -14,9 +14,13 @@ $ lxd init
 **Provide default option for all except these:**
 
 Name of the new storage pool [default=default]: local
+
 Name of the storage backend to use (btrfs, ceph, dir, lvm, zfs) [default=zfs]: dir
+
 What should the new bridge be called? [default=lxdbr0]: lxdfan0
+
 What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: 240.235.0.1/24
+
 
 #### Let's create profile for k8s cluster
 Make sure to clone this repo and run these commands moving into lxd-provisioning directory
@@ -316,3 +320,16 @@ pod/fastapiapp-5cd89c79b5-ngcwb             1/1     Running     0          6h25m
 pod/fastapiapp-5cd89c79b5-z2xg2             1/1     Running     0          6h25m
 pod/fastapiapp-test-connection              0/1     Completed   0          5h4m
 ```
+
+### To Do Next
+- Jenkins-Git configurations
+- Jenkins-Docker configurations
+- Rancher-Git configurations 
+- Rancher installation and configurations
+- Jenkins installation and configurations
+- Adding stateful app to the cluster
+- Backup System
+- Disaster Recovery
+- Adding Ingress
+- Adding monitoring
+- Adding multiple microservices to the cluster and API GW
