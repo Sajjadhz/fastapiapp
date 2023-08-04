@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: fastapiapp-deployment
+
+  labels:
+    app.kubernetes.io/instance: fastapiapp
+    app.kubernetes.io/name: fastapiapp
+    app: fastapiapp
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      app: fastapiapp
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: fastapiapp
+
+    spec:
+
+      containers:
+
+      - name: fastapiapp
+
+        image: sajjadhz/fastapiapp:latest
+
+        ports:
+
+        - containerPort: 8000
+
