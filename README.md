@@ -3,6 +3,7 @@ This repository include a sample DevOps task in which we are going to install sa
 
 
 ### Setting up K8s Cluster using LXC/LXD 
+___
 > **Note:** For development purpose and not recommended for Production use
 
 #### Installing the LXC on Ubuntu 
@@ -158,6 +159,7 @@ kworker2   Ready    <none>                 16d   v1.22.0
 ```
 
 ### Running app using docker-compose
+___
 Move to the directory where docker-compose.yaml belongs.
 
 #### Run docker-compose command
@@ -190,6 +192,7 @@ docker-compose down
 ```
 
 ### Deploying app on k8s cluster using kubectl command
+___
 In order to deploy the app on k8s cluster first you need to build docker image and push it to your private registry and provide image pull secret for k8s cluster to be able to pull the image and edit k8s manifests for your own docker private registry.
 
 #### Build docker image and push to registry
@@ -240,6 +243,7 @@ You can also verify your app deployment on your browsert, enter $NODE_IP:30007/a
 ```
 
 ### Installing app by using helmchart
+___
 Move to charts directory and edit values and replace image registry with your own private registry and run following command:
 #### Get helm template before installing app
 You can use helm template command to see what will be deployed on your cluster before installing the app
@@ -322,6 +326,7 @@ pod/fastapiapp-test-connection              0/1     Completed   0          5h4m
 ```
 
 ### To Do Next
+___
 - Jenkins-Git configurations
 - Jenkins-Docker configurations
 - Rancher-Git configurations 
