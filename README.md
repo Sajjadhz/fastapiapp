@@ -339,3 +339,5 @@ ___
 - Adding monitoring (EFK Stack)
 - Adding multiple microservices to the cluster and API GW
 - Adding configuratin management tool (Ansible)
+- Updating and installing Helm chart by Jenkins
+- Image security check by SonarQube
