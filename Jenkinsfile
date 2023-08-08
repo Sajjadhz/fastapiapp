@@ -23,14 +23,15 @@ pipeline {
       steps {
         sh 'docker push $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-$GIT_CMT_SHORT'
       }
-    }
-    stage('Deploying React.js container to Kubernetes') {
+    }    
+    stage('Apply Kubernetes Files') {
       steps {
-        script {
-          kubernetesDeploy(configs: "manifests/deployment-fastapiapp.yaml", "manifests/service-fastapiapp.yaml")
+          withKubeConfig([credentialsId: 'kubeconfig']) {
+          sh 'kubectl apply -f manifests/deployment-fastapiapp.yaml'
+          sh 'kubectl apply -f manifests/service-fastapiapp.yaml'
         }
       }
-    }
+  }
   }
   post {
     always {
