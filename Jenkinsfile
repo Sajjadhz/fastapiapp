@@ -24,14 +24,21 @@ pipeline {
         sh 'docker push $DOCKER_REGISTRY/$DOCKERHUB_CREDENTIALS_USR/fastapiapp:$BUILD_NUMBER-$GIT_CMT_SHORT'
       }
     }    
-    stage('Apply Kubernetes Files') {
+    stage('Apply Kubernetes Manifest Files') {
       steps {
-          withKubeConfig([credentialsId: 'lxc-k8s-config']) {
-          sh 'kubectl apply -f manifests/deployment-fastapiapp.yaml'
-          sh 'kubectl apply -f manifests/service-fastapiapp.yaml'
-        }
+          script {
+              try {
+                  withKubeConfig([credentialsId: 'lxc-k8s-config']) {
+                  sh 'kubectl apply -f manifests/deployment-fastapiapp.yaml'
+                  sh 'kubectl apply -f manifests/service-fastapiapp.yaml'
+                  }
+              } catch (err) {
+                  echo err.getMessage()
+              }
+          }
+          echo currentBuild.result
       }
-  }
+    }
   }
   post {
     always {
