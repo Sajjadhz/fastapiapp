@@ -26,7 +26,7 @@ pipeline {
     }    
     stage('Apply Kubernetes Files') {
       steps {
-          withKubeConfig([credentialsId: 'kubeconfig']) {
+          withKubeConfig([credentialsId: 'lxc-k8s-config']) {
           sh 'kubectl apply -f manifests/deployment-fastapiapp.yaml'
           sh 'kubectl apply -f manifests/service-fastapiapp.yaml'
         }
