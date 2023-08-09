@@ -37,19 +37,18 @@ pipeline {
           }
           echo currentBuild.result
       }
+    }  
+    stage('verifying app deployment'){
+              steps{
+                  script{
+                      withKubeConfig([credentialsId: 'lxc-k8s-config']) {
+                          sh 'helm test fastapiapp'
+
+                      }
+                  }
+              }
     }
   }
-  stage('verifying app deployment'){
-            steps{
-                script{
-                     withKubeConfig([credentialsId: 'lxc-k8s-config']) {
-                         sh 'helm test fastapiapp'
-
-                     }
-                }
-            }
-        }
-    }
   post {
     always {
       sh 'docker logout'
