@@ -8,21 +8,20 @@ pipeline {
     DOCKER_REGISTRY = 'docker.io'
     GIT_CMT_SHORT = "${GIT_COMMIT.take(7)}"
   }
-  stages {
-    stage('change directory') {
-      steps {
-        sh 'cd terraform'
-      }
-    }
+  stages {    
     stage('init') {
-      steps {
+      dir('terraform'){
+        steps {
         sh 'terraform init'
-      }
+        }}
+      }      
     }    
     stage('apply') {
-      steps {
+      dir('terraform'){
+        steps {
         sh 'terraform apply --auto-approve'
-      }
+        }
+      }      
     }
     stage('destry') {
       steps {
