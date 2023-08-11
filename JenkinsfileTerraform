@@ -9,16 +9,16 @@ pipeline {
     GIT_CMT_SHORT = "${GIT_COMMIT.take(7)}"
   }
   stages {
-    stage('init') {
-      steps {
-        sh 'terraform init'
-      }
-    }
     stage('change directory') {
       steps {
         sh 'cd terraform'
       }
     }
+    stage('init') {
+      steps {
+        sh 'terraform init'
+      }
+    }    
     stage('apply') {
       steps {
         sh 'terraform apply --auto-approve'
