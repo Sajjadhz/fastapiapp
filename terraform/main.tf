@@ -55,7 +55,7 @@ resource "lxd_profile" "profile1" {
 }
 # Create LXC Container
 resource "lxd_container" "nodes" {
-  for_each = toset( ["kmaster1", "kworker1", "kworker2"] )    
+  for_each = toset( ["kmaster", "kworker1", "kworker2"] )    
   name      = each.key
   image     = "ubuntu:22.04"
   ephemeral = false
