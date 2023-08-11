@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('sajjad-dockerhub')
+    DOCKER_REGISTRY = 'docker.io'
+    GIT_CMT_SHORT = "${GIT_COMMIT.take(7)}"
+  }
+  stages {
+    stage('init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+    stage('apply') {
+      steps {
+        sh 'terraform apply --auto-approve'
+      }
+    }
+    stage('destry') {
+      steps {
+        echo 'destroy'
+      }
+    }     
+  }  
+}
