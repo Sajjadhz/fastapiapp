@@ -9,19 +9,16 @@ pipeline {
     GIT_CMT_SHORT = "${GIT_COMMIT.take(7)}"
   }
   stages {    
-    stage('init') {
-      dir('terraform'){
-        steps {
-        sh 'terraform init'
-        }
+    stage('init') {      
+      steps {
+      sh 'terraform -chdir=./terraform init'
       }
+      
     }       
-    stage('apply') {
-      dir('terraform'){
-        steps {
-        sh 'terraform apply --auto-approve'
-        }
-      }      
+    stage('apply') {      
+      steps {
+      sh 'terraform -chdir=./terraform apply --auto-approve'
+      }            
     }
     stage('destry') {
       steps {
