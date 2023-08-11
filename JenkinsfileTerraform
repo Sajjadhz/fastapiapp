@@ -13,9 +13,9 @@ pipeline {
       dir('terraform'){
         steps {
         sh 'terraform init'
-        }}
-      }      
-    }    
+        }
+      }
+    }       
     stage('apply') {
       dir('terraform'){
         steps {
